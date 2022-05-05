@@ -1,0 +1,47 @@
+{
+  "user": {
+    "id": "user_id",
+    "name": "string",
+    "surname": "string",
+    "pasword": "string",
+    "email": "string",
+    "registerNumber": "string",
+    "phoneNumber": "string",
+    "username": "string",
+    "userRole": "string"
+  },
+  "lesson": {
+    "id": "lesson_id",
+    "name": "string",
+    "category": "string"
+  },
+  "question": {
+    "id": "answer_id",
+    "lesson_id": "lesson_id",
+    "category": "string",
+    "body": "string",
+    "correctAnswers": "string[]",
+    "time": "string",
+    "difficulty": "string",
+    "penalty": "boolean",
+    "chapter": "string",
+    "score": "string"
+  },
+  "issuedAnswer": {
+    "id": "issuedAnswer_id",
+    "question_id": "question_id",
+    "lesson_id": "lesson_id",
+    "issuedById": "user_id",
+    "body": "string",
+    "startedAt": "date",
+    "submitedAt": "date",
+    "score": "date"
+  },
+  "exam": {
+    "id": "exam_id",
+    "lesson_id": "lesson_id",
+    "startDate": "date",
+    "questions": "string[]",
+    "status": "string"
+  }
+}
