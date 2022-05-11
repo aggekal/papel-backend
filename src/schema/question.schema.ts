@@ -43,9 +43,23 @@ const params = {
 };
 
 const categoryParams = {
-  params: object({
+  body: object({
     category: string({
       required_error: "category is required",
+    }),
+    lessonId: string({
+      required_error: "lessonId is required",
+    }),
+  }),
+};
+
+const difficultyPayload = {
+  body: object({
+    difficulty: string({
+      required_error: "difficulty is required",
+    }),
+    lessonId: string({
+      required_error: "lessonId is required",
     }),
   }),
 };
@@ -69,6 +83,10 @@ export const getQuestionByCategorySchema = object({
   ...categoryParams,
 });
 
+export const getQuestionByDifficultySchema = object({
+  ...difficultyPayload,
+});
+
 export const getQuestionsByLessonSchema = object({
   ...params,
 });
@@ -79,6 +97,9 @@ export type readQuestionInput = TypeOf<typeof getQuestionSchema>;
 export type deleteQuestionInput = TypeOf<typeof deleteQuestionSchema>;
 export type getQuestionByCategoryInput = TypeOf<
   typeof getQuestionByCategorySchema
+>;
+export type getQuestionByDifficultyInput = TypeOf<
+  typeof getQuestionByDifficultySchema
 >;
 export type getQuestionsByLessonInput = TypeOf<
   typeof getQuestionsByLessonSchema

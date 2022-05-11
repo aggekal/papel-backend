@@ -4,6 +4,7 @@ import {
   createQuestionInput,
   deleteQuestionInput,
   getQuestionByCategoryInput,
+  getQuestionByDifficultyInput,
   getQuestionsByLessonInput,
   readQuestionInput,
   updateQuestionInput,
@@ -14,6 +15,7 @@ import {
   findAndUpdateQuestion,
   findQuestion,
   getQuestionByCategory,
+  getQuestionByDifficulty,
   getQuestionsByLesson,
 } from "../service/question.service";
 
@@ -37,7 +39,7 @@ export async function updateQuestionHandler(
     return res.sendStatus(404);
   }
   const updatedQuestion = await findAndUpdateQuestion({ questionId }, update, {
-    new: true,
+    new: false,
   });
   return res.send(updatedQuestion);
 }
@@ -62,17 +64,30 @@ export async function deleteQuestionHandler(
   if (!question) {
     return res.sendStatus(404);
   }
-  console.log("will detele question with id", question.id);
   await deleteQuestion({ questionId });
   return res.sendStatus(200);
 }
 
 export async function getQuestionByCategoryHandler(
-  req: Request<getQuestionByCategoryInput["params"]>,
+  req: Request<getQuestionByCategoryInput["body"]>,
   res: Response
 ) {
-  const category = req.params.category;
-  const response = await getQuestionByCategory({ category });
+  const category = req.body.category;
+  const lessonId = req.body.lessonId;
+  const response = await getQuestionByCategory({ category, lessonId });
+  if (response) {
+    res.send(response);
+  }
+}
+
+export async function getQuestionByDifficultyHandler(
+  req: Request<getQuestionByDifficultyInput["body"]>,
+  res: Response
+) {
+  const difficulty = req.body.difficulty;
+  const lessonId = req.body.lessonId;
+  console.log(req.body);
+  const response = await getQuestionByDifficulty({ difficulty, lessonId });
   if (response) {
     res.send(response);
   }

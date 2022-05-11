@@ -46,6 +46,7 @@ import {
   createQuestionSchema,
   deleteQuestionSchema,
   getQuestionByCategorySchema,
+  getQuestionByDifficultySchema,
   getQuestionsByLessonSchema,
   getQuestionSchema,
   updateQuestionSchema,
@@ -54,6 +55,7 @@ import {
   createQuestionHandler,
   deleteQuestionHandler,
   getQuestionByCategoryHandler,
+  getQuestionByDifficultyHandler,
   getQuestionHandler,
   getQuestionsByLessonHandler,
   updateQuestionHandler,
@@ -177,10 +179,16 @@ function routes(app: Express) {
     deleteQuestionHandler
   );
 
-  app.get(
-    "/api/questions/categories/:category",
+  app.post(
+    "/api/categories",
     validateResource(getQuestionByCategorySchema),
     getQuestionByCategoryHandler
+  );
+
+  app.post(
+    "/api/difficulties",
+    validateResource(getQuestionByDifficultySchema),
+    getQuestionByDifficultyHandler
   );
   //answers
 

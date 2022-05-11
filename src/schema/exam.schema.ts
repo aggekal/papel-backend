@@ -1,11 +1,16 @@
-import { object, string, TypeOf, date, number } from "zod";
+import { z, object, string, TypeOf, date, number } from "zod";
 import { EXAM_STATUS } from "../../types";
+
+const dateSchema = z.preprocess((arg) => {
+  if (typeof arg == "string" || arg instanceof Date) return new Date(arg);
+}, z.date());
+
 const payload = {
   body: object({
     lessonId: string({
       required_error: "lesson id is required",
     }),
-    startDate: date().default(() => new Date()),
+    startDate: dateSchema,
     questions: string({
       required_error: "questions required",
     }).array(),

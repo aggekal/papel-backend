@@ -14,7 +14,6 @@ export async function findQuestion(
   query: FilterQuery<QuestionDocument>,
   options: QueryOptions = { lean: false }
 ) {
-  console.log(query);
   return QuestionModel.findOne({ _id: query.questionId }, {}, options);
 }
 export async function findAndUpdateQuestion(
@@ -22,10 +21,13 @@ export async function findAndUpdateQuestion(
   update: UpdateQuery<QuestionDocument>,
   options: QueryOptions
 ) {
-  return QuestionModel.findOneAndUpdate(query, update, options);
+  return QuestionModel.findOneAndUpdate(
+    { _id: query.questionId },
+    update,
+    options
+  );
 }
 export async function deleteQuestion(query: FilterQuery<QuestionDocument>) {
-  console.log("in delete", query);
   return QuestionModel.deleteOne({ _id: query.questionId });
 }
 
@@ -40,12 +42,28 @@ export async function getQuestionByCategory(
   query: FilterQuery<QuestionCategory>,
   options: QueryOptions = { lean: true }
 ) {
-  return QuestionModel.find({ category: query.category }, {}, options);
+  return QuestionModel.find(
+    { category: query.category, lessonId: query.lessonId },
+    {},
+    options
+  );
+}
+
+export async function getQuestionByDifficulty(
+  query: FilterQuery<QuestionCategory>,
+  options: QueryOptions = { lean: true }
+) {
+  console.log(query);
+  return QuestionModel.find(
+    { difficulty: query.difficulty, lessonId: query.lessonId },
+    {},
+    options
+  );
 }
 
 export async function getQuestionsByLesson(
   query: FilterQuery<QuestionsLesson>,
-  options: QueryOptions = { lean: true }
+  options: QueryOptions = { lean: false }
 ) {
   return QuestionModel.find({ lessonId: query.lessonId }, {}, options);
 }

@@ -17,7 +17,7 @@ export interface ExamDocument extends ExamInput, mongoose.Document {
 const examSchema = new mongoose.Schema(
   {
     lessonId: { type: String, required: true },
-    startDate: { type: Date, required: true, default: new Date() },
+    startDate: { type: Date, required: true },
     questions: { type: [String], required: true },
     status: { type: String, required: true, default: EXAM_STATUS.NOT_STARTED },
     maxScore: { type: Number, required: true, default: 10 },
