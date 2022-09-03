@@ -56,6 +56,10 @@ export const getExamQuestionsSchema = object({
   ...params,
 });
 
+export const getExamsPerLessonSchema = object({
+  ...params,
+});
+
 export const getUserExamQuestionsAndAnswersSchema = object({
   ...userExamParams,
 });
@@ -65,6 +69,7 @@ export type updateExamInput = TypeOf<typeof updateExamSchema>;
 export type readExamInput = TypeOf<typeof getExamSchema>;
 export type deleteExamInput = TypeOf<typeof deleteExamSchema>;
 export type getExamQuestionsInput = TypeOf<typeof getExamQuestionsSchema>;
+export type getExamsPerLessonInput = TypeOf<typeof getExamsPerLessonSchema>;
 export type getUserExamQuestionsAndAnswersInput = TypeOf<
   typeof getUserExamQuestionsAndAnswersSchema
 >;

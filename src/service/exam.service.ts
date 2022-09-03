@@ -10,6 +10,12 @@ export async function findExam(
 ) {
   return ExamModel.findOne(query, {}, options);
 }
+export async function findExams(
+  query: FilterQuery<ExamDocument>,
+  options: QueryOptions = { lean: true }
+) {
+  return ExamModel.find(query, {}, options);
+}
 export async function findAndUpdateExam(
   query: FilterQuery<ExamDocument>,
   update: UpdateQuery<ExamDocument>,

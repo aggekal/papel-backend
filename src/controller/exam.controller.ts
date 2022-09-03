@@ -3,6 +3,7 @@ import {
   createExamInput,
   deleteExamInput,
   getExamQuestionsInput,
+  getExamsPerLessonInput,
   getUserExamQuestionsAndAnswersInput,
   readExamInput,
   updateExamInput,
@@ -13,6 +14,7 @@ import {
   deleteExam,
   findAndUpdateExam,
   findExam,
+  findExams,
 } from "../service/exam.service";
 import { findQuestion, findQuestions } from "../service/question.service";
 
@@ -78,6 +80,18 @@ export async function getExamQuestionsHandler(
   }
 
   if (!examId || !exam) {
+    return res.sendStatus(404);
+  }
+}
+
+export async function getExamsPerLessonHandler(
+  req: Request<getExamsPerLessonInput["params"]>,
+  res: Response
+) {
+  const lessonId = req.params._id;
+  const exams = await findExams({ lessonId });
+  if (exams) res.send(exams);
+  if (!lessonId || !exams) {
     return res.sendStatus(404);
   }
 }

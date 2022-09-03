@@ -83,6 +83,7 @@ import {
   deleteExamHandler,
   getExamHandler,
   getExamQuestionsHandler,
+  getExamsPerLessonHandler,
   getUserExamQuestionsAndAnswersHandler,
   updateExamHandler,
 } from "./controller/exam.controller";
@@ -229,6 +230,7 @@ function routes(app: Express) {
   );
 
   app.get("/api/questions/exams/:_id", getExamQuestionsHandler);
+  app.get("/api/get_exams_per_lesson/:_id", getExamsPerLessonHandler);
   app.get(
     "/api/users/exams/answers/:userId&:examId",
     getUserExamQuestionsAndAnswersHandler
